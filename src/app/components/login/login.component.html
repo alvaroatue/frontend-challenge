@@ -1,0 +1,79 @@
+<div class="login-container">
+  <div class="left-panel">
+    <h1>Iniciar sesión</h1>
+    <p>Nos alegra tenerte de vuelta y estamos listos para atender tus necesidades. Inicia sesión y continúa aprovechando al máximo nuestra plataforma.</p>
+    
+    <div class="features">
+      <div class="feature-item">
+        <span class="feature-icon">📊</span>
+        <div class="feature-text">
+          <h3>Monitoreo integral</h3>
+          <p>Administra y monitorea múltiples plantas de forma centralizada</p>
+        </div>
+      </div>
+      
+      <div class="feature-item">
+        <span class="feature-icon">🔔</span>
+        <div class="feature-text">
+          <h3>Notificaciones en tiempo real</h3>
+          <p>Recibe notificaciones en tiempo real sobre las mediciones</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="background-pattern"></div>
+  </div>
+
+  <div class="right-panel">
+    <div class="login-form-container">
+      <h2>Portal de monitoreo</h2>
+      <h3>Iniciar sesión</h3>
+      
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <div class="form-group">
+          <label>Email</label>
+          <input 
+            type="email" 
+            formControlName="email" 
+            placeholder="luciano@email.com"
+            [class.error]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+          >
+          <div class="error-message" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+            <span *ngIf="loginForm.get('email')?.errors?.['required']">El correo es requerido</span>
+            <span *ngIf="loginForm.get('email')?.errors?.['email']">Ingrese un correo válido</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Contraseña</label>
+          <div class="password-input">
+            <input 
+              type="password" 
+              formControlName="password"
+              placeholder="Ingrese su contraseña"
+              [class.error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+            >
+            <span class="password-toggle">👁️</span>
+          </div>
+          <div class="error-message" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+            <span *ngIf="loginForm.get('password')?.errors?.['required']">La contraseña es requerida</span>
+            <span *ngIf="loginForm.get('password')?.errors?.['minlength']">La contraseña debe tener al menos 8 caracteres</span>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <a routerLink="/register" class="register-link">¿No tienes cuenta? Regístrate aquí</a>
+          <button type="submit" [disabled]="loginForm.invalid || loading">
+            {{ loading ? 'Iniciando sesión...' : 'Iniciar sesión' }}
+          </button>
+        </div>
+
+        <div class="error-message" *ngIf="error">{{ error }}</div>
+        
+        <div class="terms">
+          Protegido por reCAPTCHA y sujeto a la <a href="#">Política de Privacidad</a> y <a href="#">Condiciones</a>.
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

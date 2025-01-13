@@ -1,0 +1,156 @@
+.dashboard-container {
+  background: #F8FAFC;
+  min-height: 100vh;
+  padding: 24px;
+  margin-left: 72px; /* Añade margen para el sidenav */
+}
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-title {
+  font-size: 14px;
+  color: #64748B;
+  margin-bottom: 8px;
+}
+
+.card-value {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1A1A1A;
+}
+
+.card-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.card-icon.success { 
+  background: #DCFCE7; 
+  color: #16A34A; 
+}
+
+.card-icon.warning { 
+  background: #FEF3C7; 
+  color: #D97706; 
+}
+
+.card-icon.danger { 
+  background: #FEE2E2; 
+  color: #DC2626; 
+}
+
+.card-icon.disabled { 
+  background: #F1F5F9; 
+  color: #64748B; 
+}
+
+.plants-section {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.section-header h2 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1A1A1A;
+}
+
+.add-plant-btn {
+  background: #0EA5E9;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.add-plant-btn:hover {
+  background: #0284C7;
+}
+
+.plants-table {
+  width: 100%;
+}
+
+.plants-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.plants-table th {
+  text-align: left;
+  padding: 12px 24px;
+  font-size: 12px;
+  color: #64748B;
+  font-weight: 500;
+  background: #F8FAFC;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.plants-table td {
+  padding: 16px 24px;
+  font-size: 14px;
+  color: #1A1A1A;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.country-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.country-cell img {
+  width: 20px;
+  height: 15px;
+  object-fit: cover;
+}
+
+.action-btn {
+  background: transparent;
+  border: none;
+  color: #64748B;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 18px;
+  transition: color 0.2s;
+}
+
+.action-btn:hover {
+  color: #1A1A1A;
+}

@@ -1,0 +1,31 @@
+<div class="modal">
+  <div class="modal-content">
+    <h2>{{ plant?.id ? 'Edit Plant' : 'Create Plant' }}</h2>
+    <form [formGroup]="plantForm" (ngSubmit)="onSave()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input id="name" formControlName="name" type="text">
+      </div>
+      <div class="form-group">
+        <label for="country">Country</label>
+        <input id="country" formControlName="country" type="text">
+      </div>
+      <div class="form-group">
+        <label for="readings">Readings</label>
+        <input id="readings" formControlName="readings" type="number" min="0">
+      </div>
+      <div class="form-group">
+        <label for="mediumAlerts">Medium Alerts</label>
+        <input id="mediumAlerts" formControlName="mediumAlerts" type="number" min="0">
+      </div>
+      <div class="form-group">
+        <label for="criticalAlerts">Critical Alerts</label>
+        <input id="criticalAlerts" formControlName="criticalAlerts" type="number" min="0">
+      </div>
+      <div class="modal-actions">
+        <button type="button" (click)="onClose()">Cancel</button>
+        <button type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

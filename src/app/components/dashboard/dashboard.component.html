@@ -1,0 +1,100 @@
+<div class="app-layout">
+  <app-sidenav></app-sidenav>
+  
+  <div class="main-content">
+    <app-navbar></app-navbar>
+    
+    <div class="dashboard-container">
+      <div class="dashboard-header">
+        <h1>Monitoreo global</h1>
+      </div>
+
+      <div class="summary-cards">
+        <div class="card info">
+          <div class="card-content">
+            <div>
+              <div class="card-title">Lecturas OK</div>
+              <div class="card-value">{{dashboardSummary.totalReadings}}</div>
+            </div>
+            <div class="card-icon check">✓</div>
+          </div>
+        </div>
+
+        <div class="card warning">
+          <div class="card-content">
+            <div>
+              <div class="card-title">Alertas medias</div>
+              <div class="card-value">{{dashboardSummary.mediumAlerts}}</div>
+            </div>
+            <div class="card-icon warning">!</div>
+          </div>
+        </div>
+
+        <div class="card danger">
+          <div class="card-content">
+            <div>
+              <div class="card-title">Alertas rojas</div>
+              <div class="card-value">{{dashboardSummary.criticalAlerts}}</div>
+            </div>
+            <div class="card-icon danger">⚠</div>
+          </div>
+        </div>
+
+        <div class="card disabled">
+          <div class="card-content">
+            <div>
+              <div class="card-title">Sensores deshabilitados</div>
+              <div class="card-value">{{dashboardSummary.disabledSensors}}</div>
+            </div>
+            <div class="card-icon disabled">×</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="plants-section">
+        <div class="section-header">
+          <h2>Plantas</h2>
+          <button class="add-plant-btn" (click)="onPlantAction('create', null)">+ Crear nueva planta</button>
+        </div>
+
+        <div class="plants-table">
+          <table>
+            <thead>
+              <tr>
+                <th>País</th>
+                <th>Nombre de la planta</th>
+                <th>Lecturas</th>
+                <th>Alertas medias</th>
+                <th>Alertas rojas</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let plant of plants">
+                <td>
+                  <img [src]="'assets/flags/' + plant.country.toLowerCase() + '.svg'" alt="flag">
+                  {{plant.country}}
+                </td>
+                <td>{{plant.name}}</td>
+                <td>{{plant.readings}}</td>
+                <td>{{plant.mediumAlerts}}</td>
+                <td>{{plant.criticalAlerts}}</td>
+                <td>
+                  <button class="action-btn" (click)="onPlantAction('edit', plant)">✏️</button>
+                  <button class="action-btn" (click)="onPlantAction('delete', plant)">🗑️</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-edit-plant-modal 
+    *ngIf="selectedPlant !== null" 
+    [plant]="selectedPlant" 
+    (save)="onSavePlant($event)" 
+    (close)="onCloseModal()">
+  </app-edit-plant-modal>
+</div>

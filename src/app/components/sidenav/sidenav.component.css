@@ -1,0 +1,56 @@
+.sidenav {
+  width: 72px;
+  background: #1F2937;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  height: 100vh; /* Asegura que el sidenav ocupe toda la altura de la ventana */
+  position: fixed; /* Fija el sidenav en su posición */
+  top: 0;
+  left: 0;
+}
+
+.logo {
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+  margin-bottom: 32px; /* Añade espacio debajo del logo */
+}
+
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  flex-grow: 1; /* Permite que el menú crezca para llenar el espacio disponible */
+}
+
+.nav-item {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9CA3AF;
+  text-decoration: none;
+}
+
+.nav-item:hover,
+.nav-item.active {
+  background: #374151;
+  color: white;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}

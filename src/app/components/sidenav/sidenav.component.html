@@ -1,0 +1,14 @@
+<aside class="sidenav">
+    <a routerLink="/" class="logo">
+      <i class="material-icons">public</i>
+    </a>
+    <nav class="nav-menu">
+      <a *ngFor="let item of menuItems" 
+         [routerLink]="item.route" 
+         routerLinkActive="active"
+         class="nav-item">
+        <i class="material-icons">{{item.icon}}</i>
+        <span class="sr-only">{{item.label}}</span>
+      </a>
+    </nav>
+  </aside>
