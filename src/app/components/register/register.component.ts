@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { Subscription } from 'rxjs';
+import { finalize, Subscription, timer } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -21,6 +21,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   loading = false;
   error = '';
+  success = '';
   showPassword = false;
   private authSubscription?: Subscription;
 
@@ -74,25 +75,32 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.valid) {
       this.loading = true;
       this.error = '';
+      this.success = '';
       
       this.authSubscription = this.authService.register(this.registerForm.value).subscribe({
         next: () => {
-          this.router.navigate(['/dashboard']);
+          this.success = 'Cuenta creada correctamente';
+          this.loading = false; // Asegúrate de detener el estado de carga
+          timer(3000).subscribe(() => {
+            this.router.navigate(['/login']);
+          });
         },
         error: (error) => {
           switch (error.status) {
+    
             case 400:
               this.error = 'Datos de registro inválidos';
               break;
-            case 409:
+            case 403:
               this.error = 'El email o nombre de usuario ya está registrado';
               break;
             default:
-              this.error = 'Error al intentar registrarse. Por favor, intente nuevamente.';
+              
+              this.loading = false;
+              timer(3000).subscribe(() => {
+                this.router.navigate([' /login']);
+              });
           }
-          this.loading = false;
-        },
-        complete: () => {
           this.loading = false;
         }
       });
@@ -114,7 +122,6 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  // Getters para facilitar la validación en el template
   get emailControl() { return this.registerForm.get('email'); }
   get usernameControl() { return this.registerForm.get('username'); }
   get passwordControl() { return this.registerForm.get('password'); }

@@ -37,19 +37,18 @@ export class LoginComponent implements OnInit {
       password: ['', [
         Validators.required, 
         Validators.minLength(8),
-        // Puedes añadir más validaciones de contraseña si lo necesitas
         Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
       ]]
     });
   }
 
   ngOnInit(): void {
-    // Verificar autenticación
+   
     if (this.authService.isAuthenticated()) {
       this.router.navigate(['/dashboard']);
     }
 
-    // Reset el formulario y el error cuando se monta el componente
+    
     this.loginForm.reset();
     this.error = '';
   }
@@ -98,7 +97,7 @@ export class LoginComponent implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
-  // Utilidad para marcar todos los campos como tocados
+  
   private markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach(control => {
       control.markAsTouched();
@@ -108,7 +107,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  // Getters para facilitar la validación en el template
+  
   get emailControl() {
     return this.loginForm.get('email');
   }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable ,tap, BehaviorSubject} from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable ,tap, BehaviorSubject, catchError, throwError} from 'rxjs';
 import { LoginCredentials, RegisterData, AuthResponse } from '../interfaces/auth';
 import { User } from '../interfaces/user';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -32,7 +32,7 @@ export class AuthService {
         tap(response => {
           if (response.token && typeof localStorage !== 'undefined') {
             localStorage.setItem('token', response.token);
-            // Aquí podrías hacer una llamada adicional para obtener la información del usuario si es necesario
+            
           }
         })
       );
@@ -47,8 +47,23 @@ export class AuthService {
             localStorage.setItem('user', JSON.stringify(response.user));
             this.currentUser = response.user;
           }
-        })
+        }),
+        catchError(this.handleError)
       );
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage: string;
+    
+    if (error.status === 409) {
+      errorMessage = 'El email o nombre de usuario ya está registrado';
+    } else if (error.status === 400) {
+      errorMessage = 'Datos inválidos. Por favor, verifique la información.';
+    } else {
+      errorMessage = 'Error al procesar la solicitud. Por favor, intente nuevamente.';
+    }
+
+    return throwError(() => new Error(errorMessage));
   }
 
   isAuthenticated(): boolean {
